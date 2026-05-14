@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 .gradle/
 build/
 out/
 .idea/
 *.iml
-=======
 # Compiled class file
 *.class
 
