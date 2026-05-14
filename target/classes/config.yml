@@ -1,0 +1,13 @@
+join:
+  welcome:
+    content: Yellow <rainbow>world</rainbow>, isn't <blue><u><click:open_url:'https://docs.papermc.io/adventure/minimessage/'>MiniMessage</click></u></blue> fun?
+    sound: entity_experience_orb_pickup
+  default:
+    content: Hello <rainbow>world</rainbow>, isn't <blue><u><click:open_url:'https://docs.papermc.io/adventure/minimessage/'>MiniMessage</click></u></blue> fun?
+    sound: entity_experience_orb_pickup
+  permissions_based:
+
+quit:
+  default:
+    content: Goodbye <rainbow>world</rainbow>, isn't <blue><u><click:open_url:'https://docs.papermc.io/adventure/minimessage/'>MiniMessage</click></u></blue> fun?
+  permissions_based:

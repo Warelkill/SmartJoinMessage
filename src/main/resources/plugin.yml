@@ -1,0 +1,5 @@
+name: SmartJoinMessage
+version: '${project.version}'
+main: fr.smartjoinmessage.Main
+api-version: '1.21'
+author: Warel
