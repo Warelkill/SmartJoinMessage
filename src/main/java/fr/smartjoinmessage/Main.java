@@ -5,7 +5,6 @@ import fr.smartjoinmessage.Listeners.OnQuit;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Bukkit;
-import org.bukkit.SoundGroup;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -24,6 +23,8 @@ public final class Main extends JavaPlugin {
     private Message default_joint_message;
     private Message default_left_message;
 
+    private boolean isPlaceHoldersAPIValid = false;
+
     private static Main instance;
 
     @Override
@@ -31,6 +32,7 @@ public final class Main extends JavaPlugin {
         setInstance();
         loadPermissionBasedMessage();
 
+        checkPlaceHoldersAPI();
         registersEvents();
         instance.saveDefaultConfig();
         Bukkit.getLogger().info("SmartJoinMessage is now enabled.");
@@ -47,6 +49,15 @@ public final class Main extends JavaPlugin {
         pm.registerEvents(new OnQuit(), this);
 
         Bukkit.getLogger().info("SmartJoinMessage - All events' listeners have been activated !");
+    }
+
+    private void checkPlaceHoldersAPI() {
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            Bukkit.getLogger().info("SmartJoinMessage - PlaceHolderAPI has been detected, so the features linked to this API are now available");
+            isPlaceHoldersAPIValid = true;
+        } else {
+            Bukkit.getLogger().warning("Could not find PlaceholderAPI! This plugin is required.");
+        }
     }
 
     private void setInstance() {
@@ -115,7 +126,7 @@ public final class Main extends JavaPlugin {
 
         if(message_content==null && sound_name==null) return null;
         if(sound_name != null) {
-            Key key = Key.key(sound_name.toUpperCase());
+            Key key = Key.key(sound_name.toLowerCase());
             sound = Sound.sound(key, Sound.Source.PLAYER, 1f, 1f);
         }
 
@@ -179,5 +190,9 @@ public final class Main extends JavaPlugin {
         if(permission_based_left_message.isEmpty()) {
             isQuitMapValid = false;
         }
+    }
+
+    public boolean isPlaceHoldersAPIValid() {
+        return isPlaceHoldersAPIValid;
     }
 }

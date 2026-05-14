@@ -2,8 +2,10 @@ package fr.smartjoinmessage.Listeners;
 
 import fr.smartjoinmessage.Main;
 import fr.smartjoinmessage.Message;
-import net.kyori.adventure.key.Key;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,8 +37,16 @@ public class OnQuit implements Listener {
 
         if(quit_message == null) return;
 
-        if(quit_message.getMessageComponent() != null) {
-            event.quitMessage(quit_message.getMessageComponent());
+        if(quit_message.getMessage() != null) {
+            String message = quit_message.getMessage();
+
+            if(Main.getInstance().isPlaceHoldersAPIValid()) {
+                message = PlaceholderAPI.setPlaceholders(p, message);
+            }
+
+            MiniMessage mm = MiniMessage.miniMessage();
+            Component message_component = mm.deserialize(message);
+            event.quitMessage(message_component);
         }
         if(quit_message.getSound() != null) {
             for(Player online_player : Bukkit.getOnlinePlayers()) {
@@ -44,5 +54,6 @@ public class OnQuit implements Listener {
                 online_player.playSound(sound);
             }
         }
+        event.quitMessage();
     }
 }
