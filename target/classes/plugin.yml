@@ -1,6 +1,0 @@
-name: SmartJoinMessage
-version: '1.0-SNAPSHOT'
-main: fr.smartjoinmessage.Main
-api-version: '1.21'
-author: Warel
-softdepend: ["PlaceholderAPI"]
