@@ -12,7 +12,6 @@ public class Message {
     }
 
     public static Message createMessage(String message, Sound sound) {
-
         return new Message(message, sound);
     }
 

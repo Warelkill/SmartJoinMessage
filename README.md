@@ -6,6 +6,7 @@ SmartJoinMessage is a modern Minecraft join / quit message plugin, built with Pa
 - Permission-based messages
 - Configurable sound when joining
 - Fully configurable
+- Compatible with PlaceHoldersAPI
 
 ## Compatibility
 | Software | Supported |

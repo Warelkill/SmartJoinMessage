@@ -1,6 +1,7 @@
 package fr.smartjoinmessage.Listeners;
 
 import fr.smartjoinmessage.Main;
+import fr.smartjoinmessage.Managers.MessageManagers;
 import fr.smartjoinmessage.Message;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
@@ -19,12 +20,14 @@ public class OnJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-        Message join_message = Main.getInstance().getDefaultJointMessage();
+        MessageManagers msgm = Main.getInstance().getMessageManager();
+
+        Message join_message = msgm.getDefaultJointMessage();
 
         if(!p.hasPlayedBefore()) {
-            join_message = Main.getInstance().getWelcomeMessage();
-        } else if(Main.getInstance().isPermissionBasedJointMessageValid()) {
-            HashMap<String, Message> permission_based_joint_message = Main.getInstance().getPermissionBasedJointMessage();
+            join_message = msgm.getWelcomeMessage();
+        } else if(msgm.isPermissionBasedJointMessageValid()) {
+            HashMap<String, Message> permission_based_joint_message = msgm.getPermissionBasedJointMessage();
             for (String permission : permission_based_joint_message.keySet()) {
                 if (p.hasPermission(permission)) {
                     join_message = permission_based_joint_message.get(permission);

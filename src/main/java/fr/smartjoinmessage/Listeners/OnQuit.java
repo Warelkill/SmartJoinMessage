@@ -1,6 +1,7 @@
 package fr.smartjoinmessage.Listeners;
 
 import fr.smartjoinmessage.Main;
+import fr.smartjoinmessage.Managers.MessageManagers;
 import fr.smartjoinmessage.Message;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.sound.Sound;
@@ -19,11 +20,12 @@ public class OnQuit implements Listener {
     @EventHandler
     public void onJoin(PlayerQuitEvent event) {
         Player p = event.getPlayer();
-        Message quit_message = Main.getInstance().getDefaultLeftMessage();
+        MessageManagers msgm = Main.getInstance().getMessageManager();
 
+        Message quit_message = msgm.getDefaultLeftMessage();
 
-        if(Main.getInstance().isPermissionBasedLeftMessageValid()) {
-            HashMap<String, Message> permission_based_left_message = Main.getInstance().getPermissionBasedLeftMessage();
+        if(msgm.isPermissionBasedLeftMessageValid()) {
+            HashMap<String, Message> permission_based_left_message = msgm.getPermissionBasedLeftMessage();
 
             if(!permission_based_left_message.isEmpty()) {
                 for (String permission : permission_based_left_message.keySet()) {
